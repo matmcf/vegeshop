@@ -1,15 +1,29 @@
-// Initialize order fields 
-ec.order = ec.order || {};
-ec.order.extraFields = ec.order.extraFields || {};
+// The field "how_did_you_find_us" asks user about how they found the store. Drop down type
+ec.order.extraFields.how_did_you_find_us = {
+    'title': 'How did you find us?',
+    'type': 'select',
+    'required': false,
+    'selectOptions': ['Google Ads', 'Friend told me', 'TV show', 'Other'],
+    'value': 'TV show', // Default value
+    'checkoutDisplaySection': 'payment_details'
+};
 
-// Add new text field to order comments section at checkout
-ec.order.extraFields.delivery_day = {
-    'title': 'Preferred delivery day',
-    'textPlaceholder': 'When would you like your order delivered?',
-    'type': 'datetime',
+Ecwid.refreshConfig();
+
+// Add pickup time selection for customer
+ec.order.extraFields.ecwid_pickup_time = {
+    'title': '_msg_ShippingDetails.pickup.customer_header',
     'required': true,
-    'checkoutDisplaySection': 'shipping_address', // show new field in order comments block
-    'orderDetailsDisplaySection': 'order_comments' // show saved data in order comments block in order details to merchant and customer
+    'type': 'datetime',
+    'checkoutDisplaySection': 'pickup_details',
+    'orderDetailsDisplaySection': 'payment_details',
+}
+
+Ecwid.refreshConfig();
+
+// Hidden field, which is not shown at checkout
+ec.order.extraFields.my_custom_field = {
+    'value': 'abcd12345'
 };
 
 Ecwid.refreshConfig();
