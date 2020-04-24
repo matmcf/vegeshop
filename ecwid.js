@@ -1,11 +1,15 @@
-/*
- * Show a promo 'Free shipping' message on the cart page. 
- * In the example below, users will see a message on the cart page 
- * informing them that they will qualify for free shipping if their 
- * order is more than $99
- */
+// Initialize order fields 
+ec.order = ec.order || {};
+ec.order.extraFields = ec.order.extraFields || {};
 
+// Add new text field to order comments section at checkout
+ec.order.extraFields.delivery_day = {
+    'title': 'Preferred delivery day',
+    'textPlaceholder': 'When would you like your order delivered?',
+    'type': 'datetime',
+    'required': true,
+    'checkoutDisplaySection': 'shipping_address', // show new field in order comments block
+    'orderDetailsDisplaySection': 'order_comments' // show saved data in order comments block in order details to merchant and customer
+};
 
-
-// your code here
-// ...
+Ecwid.refreshConfig();
